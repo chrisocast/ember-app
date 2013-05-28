@@ -1,0 +1,13 @@
+.DS_Store
+.sass-cache/
+
+node_modules/
+components/
+app/build/
+acceptance-test/captures
+
+npm-debug.log
+
+.idea/
+*.espressostorage
+*.esproj

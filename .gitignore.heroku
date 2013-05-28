@@ -1,0 +1,12 @@
+.DS_Store
+.sass-cache/
+
+node_modules/
+components/
+
+npm-debug.log
+
+.idea/
+*.espressostorage
+*.esproj
+

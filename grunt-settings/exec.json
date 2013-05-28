@@ -1,0 +1,8 @@
+{
+    "github": {
+        "cmd": "git rm -rfq --cached --ignore-unmatch app/build/ components/"
+    },
+    "heroku": {
+        "cmd": "git add app/build"
+    }
+}
