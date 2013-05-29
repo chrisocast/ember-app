@@ -23,7 +23,7 @@ requirejs.config({
     jquery: '../../components/jquery/jquery',
     ember: '../../components/ember/ember',
     handlebars: '../../components/handlebars/handlebars',
-    templates: './templates',
+    templates: '../build/templates/templates',
     text: '../../components/requirejs-text/text'
   }
 });

@@ -1,5 +1,6 @@
 define([
-  'ember'
+  'ember',
+  'templates'
 ], function(Ember) {
 
   /*
@@ -12,14 +13,39 @@ define([
     LOG_TRANSITIONS: true
   });
 
+  App.Store = DS.Store.extend({
+    revision: 12,
+    adapter: 'DS.FixtureAdapter'
+  });
 
+
+  // Routes //
   App.Router.map(function(){
     this.resource('politicians');
   });
 
 
 
+  // Models //
 
+  App.Politician = DS.Model.extend({
+    name: DS.attr('string'),
+    party: DS.attr('string')
+  });
+
+
+  // Fixtures //
+
+  App.Politician.FIXTURES = [{
+    id: 1,
+    name: "John Smith",
+    party: "Dem"
+  },
+  {
+    id: 2,
+    name: "Sally Jones",
+    party: "Rep"
+  }];
 
 
   return App;
