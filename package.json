@@ -8,13 +8,13 @@
     "grunt-contrib-livereload": "0.1.0rc8",
     "grunt-contrib-connect": "~0.1.1rc6",
     "grunt-contrib-compass": "~0.1.1rc8",
-    "grunt-casperjs": "git://github.com/colinhicks/grunt-casperjs.git",
-    "grunt-mocha": "~0.2.1",
     "grunt-contrib-requirejs": "~0.3.4",
     "grunt-contrib-jshint": "~0.1.0",
     "grunt-exec": "~0.4.0",
     "grunt-parallel": "~0.0.2",
     "grunt-contrib-copy": "~0.4.0",
-    "grunt-hogan": "git://github.com/colinhicks/grunt-hogan.git"
+
+    "grunt-ember-handlebars": "~0.4.0"
+
   }
 }

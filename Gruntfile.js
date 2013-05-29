@@ -10,7 +10,7 @@ module.exports = function (grunt) {
         regarde: {
             markup: {
                 files: 'app/**/**/*.html',
-                tasks: ['hogan', 'parallel:dev', 'livereload']
+                tasks: ['parallel:dev', 'livereload']
             },
             scss: {
                 files: 'app/**/*.scss',
@@ -41,14 +41,6 @@ module.exports = function (grunt) {
             }
         },
 
-        mocha: {
-            all: {
-                src: ['test/**/*.html'],
-                // use bridge.js to support running the tests in phantomjs
-                options: {run: true}
-            }
-        },
-
         jshint: {
             files: ['app/scripts/*.js', 'app/scripts/views/*.js'],
             options: {
@@ -67,10 +59,6 @@ module.exports = function (grunt) {
                     console: true
                 }
             }
-        },
-
-        casperjs: {
-            files: ['acceptance-test/**/*.js']
         },
 
         requirejs: {
@@ -118,13 +106,6 @@ module.exports = function (grunt) {
                 grunt: true,
                 args: ['compass:prod']
             }]
-        },
-        hogan: {
-            default_templates: {
-                templates: ["app/templates/**/*.html"],
-                output: 'app/build/templates/templates.js',
-                binderName: 'amd'
-            }
         }
     });
 
@@ -132,19 +113,14 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-livereload');
     grunt.loadNpmTasks('grunt-contrib-compass');
-    grunt.loadNpmTasks('grunt-mocha');
-    grunt.loadNpmTasks('grunt-casperjs');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-exec')
     grunt.loadNpmTasks('grunt-parallel');
-    grunt.loadNpmTasks('grunt-hogan');
 
-    grunt.registerTask('default', ['jshint', 'hogan', 'parallel:dev', 'copy:main', 'livereload-start', 'connect', 'regarde']);
-    grunt.registerTask('build', ['jshint', 'hogan', 'parallel:prod', 'copy:main']);
+    grunt.registerTask('default', ['jshint', 'parallel:dev', 'copy:main', 'livereload-start', 'connect', 'regarde']);
+    grunt.registerTask('build', ['jshint', 'parallel:prod', 'copy:main']);
     grunt.registerTask('switch-to-dev', ['copy:github', 'exec:github']);
     grunt.registerTask('switch-to-heroku', ['copy:heroku', 'exec:heroku']);
-    grunt.registerTask('test', ['mocha']);
-    grunt.registerTask('acceptance-test', ['hogan','connect:acceptanceTest', 'casperjs']);
 };

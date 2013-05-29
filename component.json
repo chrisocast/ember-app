@@ -2,17 +2,10 @@
   "name": "ember-app",
   "version": "0.1.0",
   "dependencies": {
-      "requirejs": "~2.1.4",
-      "backbone": "~1.0.0",
-      "jquery": "~1.9.1",
-      "underscore": "~1.4.4",
-      "normalize.scss": "~2.1.0",
-      "mocha": "~1.8.1",
-      "chai": "~1.5.0",
-      "requirejs-text": "~2.0.5",
-      "hogan": "git://github.com/colinhicks/hogan.js.git",
-      "core-framework": "git@github.com:nbcnews/core-framework.git#~0.0.3",
-      "ui-framework": "git@github.com:nbcnews/ui-framework.git#~0.1.0",
-      "ember.js": "~1.0.0"
+      "ember": "~1.0.0-rc.3",
+      "requirejs": "~2.1.6",
+      "handlebars": "1.0.0-rc.3",
+      "requirejs-text": "~2.0.6",
+      "normalize.scss": "~2.1.0"
   }
 }
