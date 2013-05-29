@@ -5,15 +5,5 @@
             { "cwd": "app/img/", "src": ["**"], "dest": "app/build/img", "expand": true }
 
         ]
-    },
-    "github": {
-        "files": [
-            { "src": [".gitignore.github"], "dest": ".gitignore" }
-        ]
-    },
-    "heroku": {
-        "files": [
-            { "src": [".gitignore.heroku"], "dest": ".gitignore" }
-        ]
     }
 }

@@ -10,7 +10,7 @@ module.exports = function (grunt) {
         regarde: {
             markup: {
                 files: 'app/**/**/*.html',
-                tasks: ['parallel:dev', 'livereload']
+                tasks: ['requirejs:dev', 'compass:dev', 'livereload']
             },
             scss: {
                 files: 'app/**/*.scss',
@@ -19,6 +19,10 @@ module.exports = function (grunt) {
             js: {
                 files: 'app/scripts/**/*.js',
                 tasks: ['requirejs:dev', 'livereload']
+            },
+            hbs: {
+              files: 'app/templates/**/*.hbs',
+              tasks: ['ember_handlebars']
             }
         },
 
@@ -39,6 +43,21 @@ module.exports = function (grunt) {
                     imagesDir: 'app/img'
                 }
             }
+        },
+
+        ember_handlebars: {
+          compile: {
+            options: {
+              processName: function(name) {
+                return name.replace('app/templates/', '')
+                  .replace('.hbs', '')
+                  .replace(/\//g, '_');
+              }
+            },
+            files: {
+              'app/scripts/templates.js': ['app/templates/*.hbs']
+            }
+          }
         },
 
         jshint: {
@@ -89,24 +108,7 @@ module.exports = function (grunt) {
                 }
             }
         },
-        copy: grunt.file.readJSON("grunt-settings/copy.json"),
-        exec: grunt.file.readJSON("grunt-settings/exec.json"),
-        parallel: {
-            dev: [{
-                grunt: true,
-                args: ['requirejs:dev']
-            }, {
-                grunt: true,
-                args: ['compass:dev']
-            }],
-            prod:[{
-                grunt: true,
-                args: ['requirejs:prod']
-            }, {
-                grunt: true,
-                args: ['compass:prod']
-            }]
-        }
+        copy: grunt.file.readJSON("grunt-settings/copy.json")
     });
 
     grunt.loadNpmTasks('grunt-regarde');
@@ -116,11 +118,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-exec')
-    grunt.loadNpmTasks('grunt-parallel');
+    grunt.loadNpmTasks('grunt-ember-handlebars');
 
-    grunt.registerTask('default', ['jshint', 'parallel:dev', 'copy:main', 'livereload-start', 'connect', 'regarde']);
-    grunt.registerTask('build', ['jshint', 'parallel:prod', 'copy:main']);
-    grunt.registerTask('switch-to-dev', ['copy:github', 'exec:github']);
-    grunt.registerTask('switch-to-heroku', ['copy:heroku', 'exec:heroku']);
+    grunt.registerTask('default', ['jshint', 'ember_handlebars', 'requirejs:dev', 'compass:dev', 'copy:main', 'livereload-start', 'connect', 'regarde']);
 };
