@@ -21,7 +21,7 @@ module.exports = function (grunt) {
                 tasks: ['requirejs:dev', 'livereload']
             },
             hbs: {
-              files: 'app/templates/**/*.hbs',
+              files: 'app/templates/*.hbs',
               tasks: ['ember_handlebars']
             }
         },
@@ -55,7 +55,7 @@ module.exports = function (grunt) {
               }
             },
             files: {
-              'app/scripts/templates.js': ['app/templates/*.hbs']
+              'app/build/templates/templates.js': ['app/templates/*.hbs']
             }
           }
         },
