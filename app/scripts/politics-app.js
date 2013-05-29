@@ -12,5 +12,15 @@ define([
     LOG_TRANSITIONS: true
   });
 
+
+  App.Router.map(function(){
+    this.resource('politicians');
+  });
+
+
+
+
+
+
   return App;
 });

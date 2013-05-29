@@ -9,6 +9,7 @@
 
   <h1>Campaign finance search</h1>
 
+  <script type="text/x-handlebars">
     <h3>Choose a state:</h3>
     <select name="state">
       <option value="AL">Alabama</option>
@@ -63,6 +64,21 @@
       <option value="WI">Wisconsin</option>
       <option value="WY">Wyoming</option>
     </select>
+
+      {{outlet}}
+  </script>
+
+  <script type="text/x-handlebars" id="politicians">
+    <h3>Politicians</h3>
+    <ul class="politicians-list">
+      {{#each politician}}
+        <li class="politicians">{{name}} <small>({{party}})</small></li>
+      {{/each}}
+    </ul>    
+  </script>
+
+
+
 
   <script type="text/javascript" src="build/scripts/main.js"></script>
 

@@ -1,12 +1,6 @@
+<h3>Politicians</h3>
 <ul class="politicians-list">
-  <li class="politicians">Name Name</li>
-  <li class="politicians">Name Name</li>
-  <li class="politicians">Name Name</li>
-  <li class="politicians">Name Name</li>
-  <li class="politicians">Name Name</li>
-  <li class="politicians">Name Name</li>
-  <li class="politicians">Name Name</li>
-  <li class="politicians">Name Name</li>
-  <li class="politicians">Name Name</li>
-  <li class="politicians">Name Name</li>
-</ul>
+  {{#each politician}}
+    <li class="politicians">{{name}} <small>({{party}})</small></li>
+  {{/each}}
+</ul> 
