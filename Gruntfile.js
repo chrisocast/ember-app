@@ -18,11 +18,11 @@ module.exports = function (grunt) {
             },
             js: {
                 files: 'app/scripts/**/*.js',
-                tasks: ['requirejs:dev', 'livereload']
+                tasks: ['jshint', 'requirejs:dev', 'livereload']
             },
             hbs: {
               files: 'app/templates/*.hbs',
-              tasks: ['ember_handlebars']
+              tasks: ['emberTemplates', 'requirejs:dev', 'livereload']
             }
         },
 
@@ -45,10 +45,10 @@ module.exports = function (grunt) {
             }
         },
 
-        ember_handlebars: {
+        emberTemplates: {
           compile: {
             options: {
-              processName: function(name) {
+              templateName: function(name) {
                 return name.replace('app/templates/', '')
                   .replace('.hbs', '')
                   .replace(/\//g, '_');
@@ -118,7 +118,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-ember-handlebars');
+    grunt.loadNpmTasks('grunt-ember-templates');
 
-    grunt.registerTask('default', ['jshint', 'ember_handlebars', 'requirejs:dev', 'compass:dev', 'copy:main', 'livereload-start', 'connect', 'regarde']);
+    grunt.registerTask('default', ['jshint', 'emberTemplates', 'requirejs:dev', 'compass:dev', 'copy:main', 'livereload-start', 'connect', 'regarde']);
 };

@@ -21,8 +21,8 @@ requirejs.config({
 
   paths: {
     jquery: '../../components/jquery/jquery',
-    ember: '../../components/ember/ember',
-    handlebars: '../../components/handlebars/handlebars',
+    ember: '../../components/ember/index',
+    handlebars: '../../components/handlebars/index',
     templates: '../build/templates/templates',
     text: '../../components/requirejs-text/text'
   }
