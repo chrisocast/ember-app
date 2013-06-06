@@ -1,2 +1,37 @@
-@import "../../components/normalize.scss/_normalize.scss";
-@import "_base.scss";
+// Libs /////////////////
+@import "pure";
+@import "compass/css3/box-shadow";
+@import "compass/typography/vertical_rhythm";
+
+// General styles /////////////////
+*, *:before, *:after {
+  box-sizing: border-box;
+    -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body{
+  font-family: "proxima-nova",sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color:white;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  &:link {color:white;}
+  &:visited {color:white;}
+  &:hover {color: white;}
+  text-decoration: none;
+}
+
+$money-green: rgb(118, 180, 103);
+$money-green-dark: rgb(102, 160, 88);
+
+@import "base";

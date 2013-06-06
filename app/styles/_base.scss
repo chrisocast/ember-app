@@ -1,1 +1,52 @@
-h1 {color:red;}
+
+
+.header{
+  z-index: 1000;
+  background: #333;
+  width: 100%;
+  position: fixed;
+  top:0;
+  padding: 0 20px;
+
+  .title{
+    h1{
+      @include adjust-font-size-to(20px);
+      margin:6px;
+    }   
+  }
+}
+
+.container{
+  background: $money-green;
+  max-width:900px;
+  margin:50px auto;
+  @include box-shadow(#aaa 2px 2px 10px);
+  padding:20px;
+
+  .container-col{
+    padding: 0 10px;
+    overflow-x: hidden;
+    //border-right: 1px solid $money-green-dark;
+
+    .candidates .candidate{
+      @include adjust-font-size-to(14px);
+    }
+
+    .candidate-party{
+      @include adjust-font-size-to(11px);
+    }
+
+    .pure-menu{
+      border:none;
+      background-color: $money-green;
+    }
+
+    .pure-menu-heading{
+      color:white;
+    }
+
+    .pure-menu li a:hover {
+      background: $money-green-dark; 
+    }
+  }
+}

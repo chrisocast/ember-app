@@ -1,12 +1,12 @@
-<h3>Candidate details</h3>
+<div class="pure-menu pure-menu-open states">
+  <a class="pure-menu-heading">Candidate details</a>
 
-{{log details}}
+  <ul class="candidate-details">
+    <li><h4>{{details.name}} <span class="candidate-party">({{details.party}})</span></h4></li>
+    <li>Total disbursements: {{details.total_disbursements}}</li>
+    <li>Total receipts: {{details.total_receipts}}</li>
+    <li>Total refunds: {{details.total_refunds}}</li>
+    <li>End cash: {{details.end_cash}}</li>
+  </ul>
 
-<h4>{{details.name}}</h4><small>({{details.party}})</small>
-<ul class="candidate-details">
-  <li>{{details.total_disbursements}}</li>
-  <li>{{details.total_receipts}}</li>
-  <li>{{details.total_refunds}}</li>
-  <li>{{details.end_cash}}</li>
-</ul>
-Finance info here.
+</div>

@@ -68,7 +68,6 @@ module.exports = function (grunt) {
                 immed: true,
                 latedef: true,
                 undef: false,
-                unused: true,
                 laxbreak: true,
                 globals: {
                     jQuery: true,

@@ -11,31 +11,31 @@ define([
 
   App.apiPath = "http://api.nytimes.com/svc/elections/us/v3/finances/2012/";
   App.apiKey = "a412c1034843bf43e161574404e09800%3A17%3A67432453";
-  var stateData = [
-    { name: "Alabama", id: "AL"},
-    { name: "Colorado", id: "CO"},
-    { name: "Washington", id: "WA"}
-  ];
 
 
   // Router /////////////////////////////////
 
   App.Router.map(function(){
-    this.resource('state', { path: '/:state_id' }, function(){
-      this.resource('candidate', { path: '/:candidate_id'});
+    this.resource('states', { path: '/' }, function(){
+      this.resource('state', { path: '/:state_id' }, function(){
+        this.resource('candidate', { path: '/:candidate_id'});
+      });
     });
   });
 
 
   // Routes /////////////////////////////////
 
-  App.IndexRoute = Ember.Route.extend({
+  App.StatesRoute = Ember.Route.extend({
     setupController: function(controller) {
       var states = Ember.A(); // Creates an Ember.NativeArray from an Array like object
       stateData.forEach(function (item) {
         states.push(App.State.find(item.id));
       });
       controller.set('states', states);
+    },
+    renderTemplate: function() {
+      this.render({outlet: 'states'});
     }
   });
 
@@ -44,13 +44,14 @@ define([
       // only called when the linkTo helper needs paramaters for the URL
       return { state_id: model.get('id') }; 
     },
-
     model: function(params) {
       return App.State.find(params.state_id);
     },
-
     setupController: function(controller, model) {
       model.loadState();
+    },
+    renderTemplate: function() {
+      this.render({outlet: 'state'});
     }
   });
 
@@ -64,6 +65,9 @@ define([
     },
     setupController: function(controller, model) {
       model.loadCandidateDetails();
+    },
+    renderTemplate: function() {
+      this.render({outlet: 'candidate'});
     }
   });
 
@@ -146,6 +150,69 @@ define([
     }
     return null;
   };
+
+
+  // Static data ///////////////////////////
+  var stateData = [
+    { name: 'Alabama', id: 'AL'},
+    { name: 'Alaska', id: 'AK'},
+    { name: 'American Samoa', id: 'AS'},
+    { name: 'Arizona', id: 'AZ'},
+    { name: 'Arkansas', id: 'AR'},
+    { name: 'California', id: 'CA'},
+    { name: 'Colorado', id: 'CO'},
+    { name: 'Connecticut', id: 'CT'},
+    { name: 'Delaware', id: 'DE'},
+    { name: 'District Of Columbia', id: 'DC'},
+    { name: 'Florida', id: 'FL'},
+    { name: 'Georgia', id: 'GA'},
+    { name: 'Guam', id: 'GU'},
+    { name: 'Hawaii', id: 'HI'},
+    { name: 'Idaho', id: 'ID'},
+    { name: 'Illinois', id: 'IL'},
+    { name: 'Indiana', id: 'IN'},
+    { name: 'Iowa', id: 'IA'},
+    { name: 'Kansas', id: 'KS'},
+    { name: 'Kentucky', id: 'KY'},
+    { name: 'Louisiana', id: 'LA'},
+    { name: 'Maine', id: 'ME'},
+    { name: 'Marshall Islands', id: 'MH'},
+    { name: 'Maryland', id: 'MD'},
+    { name: 'Massachusetts', id: 'MA'},
+    { name: 'Michigan', id: 'MI'},
+    { name: 'Minnesota', id: 'MN'},
+    { name: 'Mississippi', id: 'MS'},
+    { name: 'Missouri', id: 'MO'},
+    { name: 'Montana', id: 'MT'},
+    { name: 'Nebraska', id: 'NE'},
+    { name: 'Nevada', id: 'NV'},
+    { name: 'New Hampshire', id: 'NH'},
+    { name: 'New Jersey', id: 'NJ'},
+    { name: 'New Mexico', id: 'NM'},
+    { name: 'New York', id: 'NY'},
+    { name: 'North Carolina', id: 'NC'},
+    { name: 'North Dakota', id: 'ND'},
+    { name: 'Northern Mariana Islands', id: 'MP'},
+    { name: 'Ohio', id: 'OH'},
+    { name: 'Oklahoma', id: 'OK'},
+    { name: 'Oregon', id: 'OR'},
+    { name: 'Palau', id: 'PW'},
+    { name: 'Pennsylvania', id: 'PA'},
+    { name: 'Puerto Rico', id: 'PR'},
+    { name: 'Rhode Island', id: 'RI'},
+    { name: 'South Carolina', id: 'SC'},
+    { name: 'South Dakota', id: 'SD'},
+    { name: 'Tennessee', id: 'TN'},
+    { name: 'Texas', id: 'TX'},
+    { name: 'Utah', id: 'UT'},
+    { name: 'Vermont', id: 'VT'},
+    { name: 'Virgin Islands', id: 'VI'},
+    { name: 'Virginia', id: 'VA'},
+    { name: 'Washington', id: 'WA'},
+    { name: 'West Virginia', id: 'WV'},
+    { name: 'Wisconsin', id: 'WI'},
+    { name: 'Wyoming', id: 'WY' }
+  ];
 
   return App;
 });

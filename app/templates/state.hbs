@@ -1,18 +1,16 @@
-<h3>Candidate list:</h3>
-<ul class="candidate-list">
+<div class="pure-menu pure-menu-open candidates">
+  <a class="pure-menu-heading">Choose a candidate</a>
+
   {{#if loaded}}
-
+    <ul class="candidate-list">
     {{#each candidate in candidates}}
-      <li class="candidate">
-        {{#linkTo 'candidate' candidate}}{{candidate.name}}{{/linkTo}}
-        <small>({{candidate.party}})</small>
-      </li>
-    {{/each}}
-
+        <li class="candidate">
+          {{#linkTo 'candidate' candidate}}{{candidate.name}} <span class="candidate-party">({{candidate.party}})</span>{{/linkTo}}
+        </li>
+      {{/each}}
+    </ul>
   {{else}}
-    Loading...
+    <span class="loading-message">Loading...</span>
   {{/if}}
-</ul>
 
-
-{{outlet}}
+</div>

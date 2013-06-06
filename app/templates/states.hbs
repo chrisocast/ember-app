@@ -1,0 +1,10 @@
+<div class="pure-menu pure-menu-open states">
+  <a class="pure-menu-heading">Choose a state</a>
+
+  <ul class="state-list">
+  {{#each state in states}}
+    <li>{{#linkTo 'state' state}}{{state.name}}{{/linkTo}}</li>
+  {{/each}}
+  </ul>
+
+</div>
