@@ -1,0 +1,18 @@
+<h3>Candidate list:</h3>
+<ul class="candidate-list">
+  {{#if loaded}}
+
+    {{#each candidate in candidates}}
+      <li class="candidate">
+        {{#linkTo 'candidate' candidate}}{{candidate.name}}{{/linkTo}}
+        <small>({{candidate.party}})</small>
+      </li>
+    {{/each}}
+
+  {{else}}
+    Loading...
+  {{/if}}
+</ul>
+
+
+{{outlet}}
