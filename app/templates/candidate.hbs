@@ -1,6 +1,7 @@
 <div class="pure-menu pure-menu-open states">
   <a class="pure-menu-heading">Candidate details</a>
 
+{{#if loaded}}
   <ul class="candidate-details">
     <li><h4>{{details.name}} <span class="candidate-party">({{details.party}})</span></h4></li>
     <li>Total disbursements: {{details.total_disbursements}}</li>
@@ -8,5 +9,8 @@
     <li>Total refunds: {{details.total_refunds}}</li>
     <li>End cash: {{details.end_cash}}</li>
   </ul>
+{{else}}
+  <span class="loading-message">Loading...</span>
+{{/if}}
 
 </div>

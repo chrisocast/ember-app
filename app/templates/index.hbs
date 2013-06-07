@@ -1,0 +1,19 @@
+<div class="container pure-g">
+  <div class="states container-col pure-u-1-3">
+    <div class="pure-menu pure-menu-open states">
+  <a class="pure-menu-heading">Choose a state</a>
+
+  <ul class="state-list">
+  {{#each state in states}}
+    <li>{{#linkTo 'state' state}}{{state.name}}{{/linkTo}}</li>
+  {{/each}}
+  </ul>
+
+    </div>
+  </div>
+
+  <div class="state container-col pure-u-1-3">{{outlet state}}</div>
+
+  <div class="politician container-col pure-u-1-3">{{outlet candidate}}</div>
+
+</div>

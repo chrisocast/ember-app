@@ -4,8 +4,8 @@ define([
 ], function(Ember) {
 
   var App = Ember.Application.create({
-    LOG_ACTIVE_GENERATION: true,
-    LOG_TRANSITIONS: true,
+    //LOG_ACTIVE_GENERATION: true,
+    //LOG_TRANSITIONS: true,
     LOG_VIEW_LOOKUPS: true
   });
 
@@ -44,11 +44,16 @@ define([
       // only called when the linkTo helper needs paramaters for the URL
       return { state_id: model.get('id') }; 
     },
-    model: function(params) {
-      return App.State.find(params.state_id);
-    },
     setupController: function(controller, model) {
-      model.loadState();
+      controller.set('loaded', false);
+
+      model.loadState(model.id).then(function(response) {
+        var candidates = Em.A();
+        response.results.forEach(function (item) {
+          candidates.push(App.Candidate.create(item.candidate));
+        });
+        controller.setProperties({candidates: candidates, loaded: true});
+      });
     },
     renderTemplate: function() {
       this.render({outlet: 'state'});
@@ -60,43 +65,24 @@ define([
       // only called when the linkTo helper needs paramaters for the URL
       return { candidate_id: model.get('id') }; 
     },
-    model: function(params) {
-      return App.Candidate.find(params.candidate_id);
-    },
     setupController: function(controller, model) {
-      model.loadCandidateDetails();
+      controller.set('loaded', false);
+
+      model.loadCandidateDetails(model.id).then(function(response) {
+        controller.setProperties({details: response.results[0], loaded: true});
+      });
     },
     renderTemplate: function() {
       this.render({outlet: 'candidate'});
     }
   });
 
-  // Controllers ////////////////////////////
-
-  //App.StateController = Ember.ObjectController.extend({});
-
-  // App.CandidateController = Ember.ObjectController.extend({
-  //   needs: ['state']
-  // });
-
 
   // Models ///////////////////////////
 
   App.State = Ember.Object.extend({
-    loaded: false,
-
-    loadState: function() {
-      if (this.get('loaded')){ return; }
-
-      var state = this;
-
-      $.getJSON(App.apiPath + "seats/" + state.get('id') + "/house%7Csenate.json?api-key=" + App.apiKey + "&callback=?").then(function(response) {
-        var candidates = Em.A();
-        response.results.forEach(function (item) {
-          candidates.push(App.Candidate.create(item.candidate));
-        });
-        state.setProperties({candidates: candidates, loaded: true});
-      });
+    loadState: function(id) {
+      return $.getJSON(App.apiPath + "seats/" + id + "/house%7Csenate.json?api-key=" + App.apiKey + "&callback=?");
     }
   });
 
@@ -113,18 +99,8 @@ define([
   });
 
   App.Candidate = Ember.Object.extend({
-    loaded: false,
-
-    loadCandidateDetails: function() {
-      if (this.get('loaded')){ return; }
-
-      var candidate = this;
-
-      $.getJSON(App.apiPath + "candidates/" + candidate.get('id') + ".json?api-key=" + App.apiKey + "&callback=?").then(function(response) {
-        //console.log("response.results[0]: ", response.results[0]);
-        candidate.setProperties({details: response.results[0], loaded: true});
-        //console.log("candidate: ", candidate);
-      });
+    loadCandidateDetails: function(id) {
+      return $.getJSON(App.apiPath + "candidates/" + id + ".json?api-key=" + App.apiKey + "&callback=?");
     }
   });
 
