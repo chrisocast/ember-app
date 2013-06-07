@@ -77,6 +77,28 @@ define([
     }
   });
 
+  // Controllers //////////////////////
+
+  App.CandidateController = Ember.ObjectController.extend({
+    loaded: false,
+    details: {},
+    totalReceipts: function(){
+      return convertToCurrency(this.get('details.total_receipts'));
+    }.property('details.total_receipts'),
+
+    totalDisbursements: function(){
+      return convertToCurrency(this.get('details.total_disbursements'));
+    }.property('details.total_disbursements'),
+
+    totalRefunds: function(){
+      return convertToCurrency(this.get('details.total_refunds'));
+    }.property('details.total_refunds'),
+
+    endCash: function(){
+      return convertToCurrency(this.get('details.end_cash'));
+    }.property('details.end_cash')
+  });
+
 
   // Models ///////////////////////////
 
@@ -91,7 +113,7 @@ define([
 
     find: function(id) {
       if (!this.store[id]) {
-        var name = App.getStateNameById(id);
+        var name = getStateNameById(id);
         this.store[id] = App.State.create({id: id, name: name});
       }
       return this.store[id];
@@ -117,7 +139,7 @@ define([
 
   // Utils //////////////////////////////
 
-  App.getStateNameById = function(id){
+  function getStateNameById(id){
     var len = stateData.length;
     for (var i=0; i<len; i++) {
       if (stateData[i].id === id) { 
@@ -125,7 +147,17 @@ define([
       }
     }
     return null;
-  };
+  }
+
+  function convertToCurrency(number) {
+    var numberStr = number.toString(), 
+    dollars = numberStr.split('.')[0];
+    //cents = (numberStr.split('.')[1] || '') +'00';
+    dollars = dollars.split('').reverse().join('')
+        .replace(/(\d{3}(?!$))/g, '$1,')
+        .split('').reverse().join('');
+    return '$' + dollars;// + '.' + cents.slice(0, 2);
+  }
 
 
   // Static data ///////////////////////////

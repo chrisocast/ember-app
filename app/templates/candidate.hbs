@@ -4,10 +4,10 @@
 {{#if loaded}}
   <ul class="candidate-details">
     <li><h4>{{details.name}} <span class="candidate-party">({{details.party}})</span></h4></li>
-    <li>Total disbursements: {{details.total_disbursements}}</li>
-    <li>Total receipts: {{details.total_receipts}}</li>
-    <li>Total refunds: {{details.total_refunds}}</li>
-    <li>End cash: {{details.end_cash}}</li>
+    <li>Total receipts: {{totalReceipts}}</li>
+    <li>Total disbursements: {{totalDisbursements}}</li>
+    <li>Total refunds: {{totalRefunds}}</li>
+    <li>End cash: {{endCash}}</li>
   </ul>
 {{else}}
   <span class="loading-message">Loading...</span>
